@@ -1,0 +1,9 @@
+# deploy a futel freeswitch server on 32-bit Centos.
+
+Start with test_32 base box
+
+# Vagrant set up
+vagrant plugin install vagrant-vbguest
+
+# add base box
+vagrant box add test_32 http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.5-i386-v20140110.box

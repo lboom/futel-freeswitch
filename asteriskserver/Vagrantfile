@@ -1,0 +1,21 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.synced_folder ".", "/vagrant",
+    :mount_options => ["dmode=777,fmode=777"]
+  # for now, just build the base box
+  config.vm.box = "test_32"
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    # may not use modules...
+    puppet.module_path = "puppet/modules"
+    puppet.options = ['--verbose']
+  end
+  config.vm.provider :virtualbox do |vb|
+    # uncomment for testing
+    #vb.gui = true
+    config.vm.network :public_network, :bridge => 'wlan0'
+  end
+end
